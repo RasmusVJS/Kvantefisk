@@ -1,12 +1,22 @@
 //The 4 different Player's who hold 4 Quantum Cards
 class Player{
+  //A username written by the player
+  String name = "";
   //Each Player's 4 Quantum Cards
   Quant quant1 = new Quant();
   Quant quant2 = new Quant();
   Quant quant3 = new Quant();
   Quant quant4 = new Quant();
   
+  String getName(){
+    return name;
+  }
+  
   //Method used to access a Player's 4 Quantum Cards, by using the card's number
+  void provideName(String newName){
+    name = newName;
+  }
+  
   Quant getQuant(int numeral){
     if (numeral == 1)
       return quant1;

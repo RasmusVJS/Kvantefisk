@@ -2,7 +2,7 @@
 void skrivemaskine(){
   //Prints and saves a letter into the word
   if (pressed){
-    println(key);
+    print(key);
     word += key;
     pressed = false;
     keyPressed = false;
@@ -12,8 +12,7 @@ void skrivemaskine(){
     pressed = true;
   //Allows the writing to end
   if (key == '+'){
-    println(word);
     //Needs to be removed later
-    noLoop();
+    wordFinished = true;
   }
 }
