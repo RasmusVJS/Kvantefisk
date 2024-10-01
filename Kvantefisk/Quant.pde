@@ -1,7 +1,7 @@
 //The actual game elements that posses 1 of 4 categories
 class Quant{
-  //The specific Quantum Card's category, all start at "None"
-  String category = "None";
+  //The specific Quantum Card's category, all start empty
+  String category = "";
   
   Quant(){
   }
@@ -16,7 +16,7 @@ class Quant{
   }
   
   //Method used to give a Quantum Card its category
-  void setCategory(String newCategory){
-    category = newCategory;
+  void setCategory(String category){
+    this.category = category;
   }
 }

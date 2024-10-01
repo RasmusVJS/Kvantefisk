@@ -13,26 +13,26 @@ void takeTurn(Player turnTaker){
     skrivemaskine();
   }
   //Once they've provided a name, that player is chosen
-  else if (player1.getName().equals(word) && stage == 1 && !turnTaker.getName().equals(word)){
-    chosenPlayer = player1;
+  else if (players[0].getName().equals(word) && stage == 1 && !turnTaker.getName().equals(word)){
+    chosenPlayer = players[0];
     wordFinished = false;
     word = "";
     stage++;
   }
-  else if (player2.getName().equals(word) && stage == 1 && !turnTaker.getName().equals(word)){
-    chosenPlayer = player2;
+  else if (players[1].getName().equals(word) && stage == 1 && !turnTaker.getName().equals(word)){
+    chosenPlayer = players[1];
     wordFinished = false;
     word = "";
     stage++;
   }
-  else if (player3.getName().equals(word) && stage == 1 && !turnTaker.getName().equals(word)){
-    chosenPlayer = player3;
+  else if (players[2].getName().equals(word) && stage == 1 && !turnTaker.getName().equals(word)){
+    chosenPlayer = players[2];
     wordFinished = false;
     word = "";
     stage++;
   }
-  else if (player4.getName().equals(word) && stage == 1 && !turnTaker.getName().equals(word)){
-    chosenPlayer = player4;
+  else if (players[3].getName().equals(word) && stage == 1 && !turnTaker.getName().equals(word)){
+    chosenPlayer = players[3];
     wordFinished = false;
     word = "";
     stage++;
@@ -45,24 +45,22 @@ void takeTurn(Player turnTaker){
   //This body of code processes the word given by the turn taker
   if (wordFinished && stage == 2){
     //First we check if the word is tricking the program
-    if (word.equals("None") || word.equals("Missing")){
+    if (!askedChosenPlayer && (word.equals("") || word.equals("yes") || word.equals("Yes")|| word.equals("no") || word.equals("No"))){
       println("Nice try");
       word = "";
       wordFinished = false;
     }
     //If not, we check if the category already exists
-    else if (word.equals(category1) || word.equals(category2) || word.equals(category3) || word.equals(category4)){
+    else if (word.equals(categories[0]) || word.equals(categories[1]) || word.equals(categories[2]) || word.equals(categories[3])){
       //If it does, we go on to check if the chosen player has one
-      for (int i = 1; i <= 12; i++){
-        if (chosenPlayer.getQuant(i).getCategory().equals("Missing"))
-          break;
-        else if (chosenPlayer.getQuant(i).getCategory().equals(word)){
+      for (int i = 0; i < chosenPlayer.hand.size(); i++){
+        if (chosenPlayer.getQuant(i).getCategory().equals(word)){
           //If they do, we go on to "give" that card to the asking Player
           playerHasCard = true;
           println(chosenPlayer.getName() + " does have one of those, here you go!");
-          chosenPlayer.getQuant(i).setCategory("None");
-          for (int j = 1; j <= 12; j++){
-            if (turnTaker.getQuant(j).getCategory().equals("None")){
+          chosenPlayer.getQuant(i).setCategory("");
+          for (int j = 0; j < turnTaker.hand.size(); j++){
+            if (turnTaker.getQuant(j).getCategory().equals("")){
               turnTaker.getQuant(j).setCategory(word);
               break;
             }
@@ -75,7 +73,7 @@ void takeTurn(Player turnTaker){
       }
       //If they don't, we need to ensure whether or not they even can have it
       if (!playerHasCard){
-        for (int i = 1; i <= 3; i++){
+        for (int i = 0; i < chosenPlayer.none.size(); i++){
           if (chosenPlayer.getNone(i).equals(word)){
             playerCantHaveCard = true;
             println(chosenPlayer.getName() + " doesn't have any " + word + ". Bad luck.");
@@ -92,20 +90,12 @@ void takeTurn(Player turnTaker){
       }
     }
     //If the category doesn't already exist, we check if all categories have already been initialized
-    else if (category1.equals("")){
-      category1 = word;
-      question(turnTaker, chosenPlayer);
-    }
-    else if (category2.equals("")){
-      category2 = word;
-      question(turnTaker, chosenPlayer);
-    }
-    else if (category3.equals("")){
-      category3 = word;
-      question(turnTaker, chosenPlayer);
-    }
-    else if (category4.equals("")){
-      category4 = word;
+    else if (categories[3].equals("")){
+      for (int i = 0; i < 4; i++){
+        if (categories[i].equals(""))
+          categories[i] = word;
+          break;
+      }
       question(turnTaker, chosenPlayer);
     }
     else{
@@ -115,7 +105,13 @@ void takeTurn(Player turnTaker){
     }
     if (stage > 2){
       turnCounter++;
-      stage = 0;
+      stage = 1;
+      askedWho = false;
+      askedWhat = false;
+      askedChosenPlayer = false;
+      chosenPlayer = null;
+      playerHasCard = false;
+      playerCantHaveCard = false;
     }
   }
 }
