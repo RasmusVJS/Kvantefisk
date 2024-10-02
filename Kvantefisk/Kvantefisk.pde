@@ -2,6 +2,7 @@
 boolean pressed = false; //<>//
 String word = "";
 boolean wordFinished = false;
+boolean usingSkrivemaskine = false;
 //These variables are used in Username
 boolean greetedAlready = false;
 boolean stopUserName = false;
@@ -15,11 +16,17 @@ int stage = 1;
 boolean playerHasCard = false;
 boolean playerCantHaveCard = false;
 String oldWord = "";
+boolean hasCategory = false;
+boolean questioning = false;
+String[] openingString = {"", "", "", "", ""};
 //turnCounter checks whose turn it is
 int turnCounter;
 String currentPlayer = "Player 1";
+//Used in GameOver
+int[] cardCount = {0, 0, 0, 0, 0};
+boolean[] hasWon = {false, false, false, false};
 //List of existing Quantum Card categories
-String[] categories = {"", "", "", ""};
+String[] categories = {"None", "None", "None", "None", ""};
 
 //The game's 4 players are created
 Player[] players = {new Player(), new Player(), new Player(), new Player()};

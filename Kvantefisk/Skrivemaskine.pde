@@ -1,5 +1,6 @@
 //Function used to write and save a word
 void skrivemaskine(){
+  usingSkrivemaskine = true;
   //Prints and saves a letter into the word
   if (pressed && key != '+' && key != CODED){
     print(key);
@@ -14,5 +15,6 @@ void skrivemaskine(){
   else if (key == '+' && !word.equals("")){
     println();
     wordFinished = true;
+    usingSkrivemaskine = false;
   }
 }

@@ -29,9 +29,29 @@ class Player{
     return hand.get(numeral);
   }
   
+  //Method used to check how many cards a player has
+  int getHandSize(){
+    return hand.size();
+  }
+  
+  //Method used to give a player a card
+  void giveQuant(String newCategory){
+    hand.add(new Quant(newCategory));
+  }
+  
+  //Method used to take a given card from a player
+  void takeQuant(int numeral){
+    hand.remove(numeral);
+  }
+  
   //Method used to access which categories a Player has said "No" to
   String getNone(int numeral){
     return none.get(numeral);
+  }
+  
+  //Method used to check how many categories a player doesn't have
+  int getNoneSize(){
+    return none.size();
   }
   
   //Method used to set a none category

@@ -5,8 +5,9 @@ void username(){
     println(currentPlayer + ", please provide your name:");
     greetedAlready = true;
   }
-  if (!wordFinished)
+  if (!wordFinished || usingSkrivemaskine)
     skrivemaskine();
+    
   else if (players[0].getName().equals("")){
     players[0].provideName(word);//Changes Player 1 to their name
     println("Thank you, " + word + "!");//Thanks them using their name
