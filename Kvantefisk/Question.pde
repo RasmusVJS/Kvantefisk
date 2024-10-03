@@ -20,9 +20,8 @@ void question(Player turnTaker, Player chosenPlayer) {
     }
     if (!hasCategory) {
       for (Quant i : chosenPlayer.hand) {
-        if (i.getCategory().equals("")) {
+        if (i.getCategory().equals("TBD")) {
           i.setCategory(oldWord);
-          hasCategory = true;
           break;
         }
       }

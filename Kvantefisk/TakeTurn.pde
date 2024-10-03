@@ -2,33 +2,11 @@ void takeTurn(Player turnTaker) {
   //Ask the player which player they want to ask for a Quantum Card
   if (!askedWho) {
     for (Player i : players) {
-      for (int j = 0; j < 5; j++) {
-        for (int n = 0; n < i.getHandSize(); n++) {
-          if (i.getQuant(n).getCategory().equals(categories[j])) {
-            cardCount[j]++;
-          }
-        }
-        if (cardCount[j] == 0) {
-          for (String gotNone : i.none) {
-            if (gotNone.equals(categories[j])) {
-              cardCount[j] = -1;
-              break;
-            }
-          }
-        }
+      ArrayList<String> currentHand = new ArrayList<String>();
+      for (Quant card : i.hand){
+        currentHand.add(card.getCategory());
       }
-      int index = 0;
-      for (int j : cardCount){
-        if (j != 0){
-          openingString[index] = categories[index] + "(" + cardCount[index] + ") ";
-        }
-        index++;
-      }
-      println(i.getName() + ": " + openingString[0] + openingString[1] + openingString[2] + openingString[3] + openingString[4]);
-      for (int j = 0; j < 5; j++){
-        cardCount[j] = 0;
-        openingString[j] = "";
-      }
+      println(i.getName() + ": " + currentHand + ", " + i.none);
     }
     println(turnTaker.getName() + ", who would you like to ask?");
     askedWho = true;
@@ -72,7 +50,7 @@ void takeTurn(Player turnTaker) {
     if (questioning)
       question(turnTaker, chosenPlayer);
     //First we check if the word is tricking the program
-    else if (!askedChosenPlayer && (word.equals("None") || word.equals("yes") || word.equals("Yes")|| word.equals("no") || word.equals("No"))) {
+    else if (!askedChosenPlayer && (word.equals("TBD") || word.equals("yes") || word.equals("Yes")|| word.equals("no") || word.equals("No"))) {
       println("Nice try");
       word = "";
       wordFinished = false;
@@ -89,7 +67,7 @@ void takeTurn(Player turnTaker) {
       if (!hasCategory) {
         int index = 0;
         for (Quant i : turnTaker.hand) {
-          if (i.getCategory().equals("")) {
+          if (i.getCategory().equals("TBD")) {
             turnTaker.getQuant(index).setCategory(word);
             break;
           }
@@ -133,10 +111,10 @@ void takeTurn(Player turnTaker) {
       }
     }
     //If the category doesn't already exist, we check if all categories have already been initialized
-    else if (categories[3].equals("None")) {
+    else if (categories[3].equals("")) {
       int index = 0;
       for (String i : categories) {
-        if (i.equals("None")) {
+        if (i.equals("")) {
           categories[index] = word;
           break;
         }
@@ -151,7 +129,7 @@ void takeTurn(Player turnTaker) {
       if (!hasCategory) {
         index = 0;
         for (Quant i : turnTaker.hand) {
-          if (i.getCategory().equals("None")) {
+          if (i.getCategory().equals("TBD")) {
             turnTaker.getQuant(index).setCategory(word);
             break;
           }
@@ -165,6 +143,7 @@ void takeTurn(Player turnTaker) {
       wordFinished = false;
     }
   }
+  //Variables are reset, so the next Player's turn can happen
   if (stage > 2) {
     turnCounter++;
     stage = 1;

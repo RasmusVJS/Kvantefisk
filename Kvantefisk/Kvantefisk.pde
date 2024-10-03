@@ -18,15 +18,14 @@ boolean playerCantHaveCard = false;
 String oldWord = "";
 boolean hasCategory = false;
 boolean questioning = false;
-String[] openingString = {"", "", "", "", ""};
 //turnCounter checks whose turn it is
 int turnCounter;
 String currentPlayer = "Player 1";
 //Used in GameOver
-int[] cardCount = {0, 0, 0, 0, 0};
+int[] cardCount = {0, 0, 0, 0};
 boolean[] hasWon = {false, false, false, false};
 //List of existing Quantum Card categories
-String[] categories = {"None", "None", "None", "None", ""};
+String[] categories = {"", "", "", ""};
 
 //The game's 4 players are created
 Player[] players = {new Player(), new Player(), new Player(), new Player()};
@@ -34,11 +33,6 @@ Player[] players = {new Player(), new Player(), new Player(), new Player()};
 void setup(){
   //Creates a board and the 4 Players
   size(600,600);
-  for(int i = 0; i <= 3; i++){
-    for(int j = 0; j <= 3; j++){
-      rect(i*150,j*150,150,150);
-    }
-  }
   //Randomizes turn order
   turnCounter = int(random(0,4));
 }

@@ -1,7 +1,7 @@
 //The actual game elements that posses 1 of 4 categories
 class Quant{
   //The specific Quantum Card's category, all start empty
-  String category = "";
+  String category = "TBD";
   
   Quant(){
   }
